@@ -1,15 +1,26 @@
-local status_ok, lsp_installer = pcall(require, "nvim-lsp-installer")
-if not status_ok then
-	return
-end
+--  local status_ok, lsp_installer = pcall(require, "nvim-lsp-installer")
+--  if not status_ok then
+--    return
+ -- end
 
 local lspconfig = require("lspconfig")
+--local masonlsp = require("mason-lspconfig")
+local servers = {
+  "jsonls",
+  "sumneko_lua",
+  "angularls",
+  "eslint_d",
+  "html",
+  "jdtls",
+  "tsserver",
+  "prismals",
+  "rust_analyzer",
+  "taplo"
+}
 
-local servers = { "jsonls", "sumneko_lua" }
-
-lsp_installer.setup({
-	ensure_installed = servers,
-})
+--  lsp_installer.setup({
+--    ensure_installed = servers,
+--  })
 
 for _, server in pairs(servers) do
 	local opts = {
@@ -22,3 +33,4 @@ for _, server in pairs(servers) do
 	end
 	lspconfig[server].setup(opts)
 end
+
