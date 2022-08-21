@@ -1,11 +1,10 @@
---  local status_ok, lsp_installer = pcall(require, "nvim-lsp-installer")
---  if not status_ok then
---    return
- -- end
+local status_ok, mason_lspconfig = pcall(require,"mason-lspconfig")
+  if not status_ok then
+    return
+  end
 
-local lspconfig = require("lspconfig")
---local masonlsp = require("mason-lspconfig")
-local servers = {
+
+ local servers = {
   "jsonls",
   "sumneko_lua",
   "angularls",
@@ -16,8 +15,41 @@ local servers = {
   "prismals",
   "rust_analyzer",
   "taplo"
-}
+  }
+mason_lspconfig.setup{
 
+  DEFAULT_SETTINGS = {
+    -- A list of servers to automatically install if they're not already installed. Example: { "rust-analyzer@nightly", "sumneko_lua" }
+    -- This setting has no relation with the `automatic_installation` setting.
+    ensure_installed = {
+      servers
+ },
+
+    -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
+    -- This setting has no relation with the `ensure_installed` setting.
+    -- Can either be:
+    --   - false: Servers are not automatically installed.
+    --   - true: All servers set up via lspconfig are automatically installed.
+    --   - { exclude: string[] }: All servers set up via lspconfig, except the ones provided in the list, are automatically installed.
+    --       Example: automatic_installation = { exclude = { "rust_analyzer", "solargraph" } }
+    automatic_installation = false,
+  }
+}
+local lspconfig = require("lspconfig")
+--[[ local masonlsp = require("mason-lspconfig")
+ local servers = {
+   "jsonls",
+   "sumneko_lua",
+   "angularls",
+   "eslint_d",
+   "html",
+   "jdtls",
+   "tsserver",
+   "prismals",
+   "rust_analyzer",
+   "taplo"
+ }
+]]
 --  lsp_installer.setup({
 --    ensure_installed = servers,
 --  })
