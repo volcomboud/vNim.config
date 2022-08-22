@@ -5,7 +5,17 @@ end
 
 local lspconfig = require("lspconfig")
 
-local servers = { "jsonls", "sumneko_lua" }
+local servers = {
+  "jsonls",
+  "sumneko_lua",
+  "angularls",
+  "arduino_language_serve",
+  "eslint",
+  "html",
+  "jdtls",
+  "rust_analyzer",
+  "tsserver"
+}
 
 lsp_installer.setup({
 	ensure_installed = servers,
